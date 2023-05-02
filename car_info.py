@@ -12,12 +12,6 @@ class Car:
         self.is_alive = True
         self.sprite = 'car'
 
-    def move(self, move_choice):
-        if move_choice == 1:
-            self.pos.x += 15
-        elif move_choice == 2:
-            self.pos.x -= 15
-
     def take_damage(self, damage):
         self.health -= damage
         if self.health <= 0:
