@@ -1,4 +1,3 @@
-from car_info import *
 
 def initial_game(field):
     for y in range(len(field)):
