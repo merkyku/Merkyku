@@ -10,7 +10,7 @@ class Car:
         self.health = 100
         self.pos = Coordinate(x, y)
         self.is_alive = True
-        self.sprite = 'O'
+        self.sprite = 'car'
 
     def move(self, move_choice):
         if move_choice == 1:
