@@ -4,7 +4,7 @@ from car_info import *
 
 
 def render_pygame(field, screen):
-    scale = 10
+    scale = 40
     for x in range(0,len(field)):
         for y in range(0,len(field)):
             if field[x][y] == 'b':
@@ -15,12 +15,12 @@ def render_pygame(field, screen):
 
 def main():
 
-    field = [[' '] * 800 for i in range(800)]
+    field = [[' '] * 20 for i in range(20)]
     field = gameplay.initial_game(field)
     x = 400
     y = 750
     car = Car(x,y)
-    field[car.pos.x][y] = car.sprite
+    field[x][y] = car.sprite
 
     pygame.init()
     pygame.font.init()
@@ -35,6 +35,7 @@ def main():
             if event.type == pygame.QUIT:
                 is_running = False
             if event.type == pygame.KEYDOWN:
+                field = gameplay.brick_fallen(field)
                 text1 = main_font.render(f'ваше здоровье {car.health}%', True, (255, 255, 255))
                 if event.key == pygame.K_LEFT:
                     if field[car.pos.x-25][y] != 'b':
@@ -43,7 +44,6 @@ def main():
                         field[car.pos.x][y] = car.sprite
                     else:
                         car.take_damage(10)
-                        screen.blit(text1, (50, 500))
                         if not car.is_alive:
                             is_running = False
                 if event.key == pygame.K_RIGHT:
@@ -53,7 +53,6 @@ def main():
                         field[car.pos.x][y] = car.sprite
                     else:
                         car.take_damage(10)
-                        screen.blit(text1, (50, 500))
                         if not car.is_alive:
                             is_running = False
         screen.fill((0, 0, 0))
