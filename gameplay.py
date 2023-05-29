@@ -35,6 +35,8 @@ def brick_fallen(field, car):
                 brick.pos.y += 1
                 field[brick.pos.x][brick.pos.y] = 'b'
         delta_time = 0
+        if random.randint(0, 100-(cooldown*3)) == 1 and cooldown > 8:
+            cooldown -= 1
     else:
         delta_time += 1
 

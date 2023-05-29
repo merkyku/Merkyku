@@ -32,9 +32,10 @@ def main():
     field = [[' '] * 20 for i in range(20)]
     field = gameplay.initial_game(field)
     x = 10
-    y = 18
+    y = 15
     car = Car(x, y)
     field[x][y] = car.sprite
+    score = 0
 
     pygame.init()
     pygame.font.init()
@@ -46,6 +47,9 @@ def main():
     while is_running:
         field = gameplay.brick_fallen(field, car)
         text1 = main_font.render(f'ваше здоровье {car.health}%', True, (255, 255, 255))
+        text2 = main_font.render(f'ваши очки {score}', True, (255, 255, 255))
+        text3 = main_font.render(f'ваша скорость {gameplay.cooldown}', True, (255, 255, 255))
+        score +=1
         if not car.is_alive:
             is_running = False
         for event in pygame.event.get():
@@ -60,6 +64,20 @@ def main():
                         field[car.pos.x][y] = car.sprite
                     else:
                         car.take_damage(10)
+                if event.key == pygame.K_UP:
+                    if field[car.pos.x][y+1] != 'b':
+                        field[car.pos.x][y] = ' '
+                        car.pos.y += 1
+                        field[car.pos.x][y] = car.sprite
+                    else:
+                        car.take_damage(10)
+                if event.key == pygame.K_DOWN:
+                    if field[car.pos.x][y-1] != 'b':
+                        field[car.pos.x][y] = ' '
+                        car.pos.y -= 1
+                        field[car.pos.x][y] = car.sprite
+                    else:
+                        car.take_damage(10)
                 if event.key == pygame.K_RIGHT:
                     if field[car.pos.x+1][y] != 'b':
                         field[car.pos.x][y] = ' '
@@ -70,11 +88,23 @@ def main():
 
         screen.fill((0, 0, 0))
         screen.blit(text1, (820, 10))
+        screen.blit(text2, (820, 40))
+        screen.blit(text3, (820, 70))
         render_pygame(field, screen)
         pygame.display.flip()
 
-        clock.tick(60)
+        clock.tick(100)
         #pygame.time.delay(100)
+    is_ending = True
+    while is_ending:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                is_ending = False
+        screen.fill((0, 0, 0))
+        main_font = pygame.font.Font(None, 100)
+        text2 = main_font.render(f'ваши очки {score}', True, (255, 255, 255))
+        screen.blit(text2, (100, 300))
+        pygame.display.flip()
 
 
 if __name__ == '__main__':
