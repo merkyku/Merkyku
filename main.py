@@ -48,7 +48,7 @@ def main():
         field = gameplay.brick_fallen(field, car)
         text1 = main_font.render(f'ваше здоровье {car.health}%', True, (255, 255, 255))
         text2 = main_font.render(f'ваши очки {score}', True, (255, 255, 255))
-        text3 = main_font.render(f'ваша скорость {gameplay.cooldown}', True, (255, 255, 255))
+        text3 = main_font.render(f'ваша скорость {33-gameplay.cooldown}', True, (255, 255, 255))
         score += 1
         if not car.is_alive:
             is_running = False

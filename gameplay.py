@@ -4,7 +4,7 @@ from car_info import *
 bricks = []
 
 delta_time = 0
-cooldown = 20
+cooldown = 23
 
 def initial_game(field):
     for y in range(len(field)):
