@@ -49,32 +49,17 @@ def main():
         text1 = main_font.render(f'ваше здоровье {car.health}%', True, (255, 255, 255))
         text2 = main_font.render(f'ваши очки {score}', True, (255, 255, 255))
         text3 = main_font.render(f'ваша скорость {gameplay.cooldown}', True, (255, 255, 255))
-        score +=1
+        score += 1
         if not car.is_alive:
             is_running = False
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 is_running = False
             if event.type == pygame.KEYDOWN:
-
                 if event.key == pygame.K_LEFT:
                     if field[car.pos.x-1][y] != 'b':
                         field[car.pos.x][y] = ' '
                         car.pos.x -= 1
-                        field[car.pos.x][y] = car.sprite
-                    else:
-                        car.take_damage(10)
-                if event.key == pygame.K_UP:
-                    if field[car.pos.x][y+1] != 'b':
-                        field[car.pos.x][y] = ' '
-                        car.pos.y += 1
-                        field[car.pos.x][y] = car.sprite
-                    else:
-                        car.take_damage(10)
-                if event.key == pygame.K_DOWN:
-                    if field[car.pos.x][y-1] != 'b':
-                        field[car.pos.x][y] = ' '
-                        car.pos.y -= 1
                         field[car.pos.x][y] = car.sprite
                     else:
                         car.take_damage(10)
@@ -94,7 +79,6 @@ def main():
         pygame.display.flip()
 
         clock.tick(100)
-        #pygame.time.delay(100)
     is_ending = True
     while is_ending:
         for event in pygame.event.get():
